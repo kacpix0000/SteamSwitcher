@@ -287,9 +287,7 @@ function Get-ProfileManifest {
             $content = Get-Content $ProfilesPath -Raw -Encoding UTF8 | ConvertFrom-Json
             if ($null -eq $content) { return @() }
             if ($content -is [System.Array]) { return $content }
-            $result = @()
-            $result += $content
-            return $result
+            return @($content)
         } catch { }
     }
     return @()
@@ -361,7 +359,7 @@ function Add-GameProfile {
 
     while ($true) {
         Show-Header -Title "GAME: $name"
-        Write-Host "GAME: $name" -ForegroundColor Yellow
+        Write-Host ">>> GAME: $name" -ForegroundColor Yellow
         Write-Host ""
         Write-Host "  [1] Generate new game script" -ForegroundColor White
         Write-Host "  [2] Back" -ForegroundColor White
@@ -385,7 +383,7 @@ function Add-GameProfile {
                 }
 
                 Show-Header -Title "GAME: $name"
-                Write-Host "GAME: $name" -ForegroundColor Yellow
+                Write-Host ">>> GAME: $name" -ForegroundColor Yellow
                 Write-Host ""
                 Write-Host "  [1] Auto-save to current games storage folder" -ForegroundColor White
                 Write-Host "  [2] Manual folder path" -ForegroundColor White
@@ -430,7 +428,7 @@ function Add-GameProfile {
                 }
                 $jsonObj | ConvertTo-Json | Set-Content -Path (Join-Path $targetFolder "accountinfo.json") -Encoding UTF8
 
-                $profiles = @($(Get-ProfileManifest))
+                $profiles = Get-ProfileManifest
                 $profiles += [PSCustomObject]@{
                     DisplayName = $name
                     Name        = $safeName
