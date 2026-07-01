@@ -15,6 +15,8 @@ This tool is useful for people who have multiple Steam accounts and want to use 
 
 ## How to Use
 
+**[Tutorial video](https://youtu.be/WHp9cOz971Y)**
+
 Upon execution, SteamSwitcher initializes a Text User Interface (TUI) main menu. Navigate the application by entering the numerical value corresponding to the required action.
 
 ### First-Time Configuration
